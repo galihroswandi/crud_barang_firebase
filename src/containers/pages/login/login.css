@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerWrapper {
+    background-color: rgb(91, 241, 233);
+    max-width: 20%;
+    padding: 1rem;
+    margin-top: 15rem;
+    border-radius: .5rem;
+    min-width: 15%;
+}
+
+.header {
+    padding: .1rem .5rem;
+    text-align: center;
+}
+
+.btn.disabled {
+    cursor: not-allowed;
+}

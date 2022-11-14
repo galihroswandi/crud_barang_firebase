@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
-import { GetDataFromAPI, PostImgToFirebase } from './../../../config/redux/actions';
+import { GetDataFromAPI } from './../../../config/redux/actions';
 import { Card, Button } from 'react-bootstrap';
-import { ref, uploadBytes } from "firebase/storage";
-import { storage } from "../../../config/firebase";
+import { getBarangFromAPI } from './../../../config/redux/actions/postImage';
 
 class Dashboard extends Component {
 
@@ -15,13 +14,21 @@ class Dashboard extends Component {
 
     componentDidMount() {
         const dataUser = JSON.parse(localStorage.getItem('User'));
-        const { GetDataFromAPI, PostImgToFirebase } = this.props;
+        const { GetDataFromAPI, GetBarangFromAPI } = this.props;
 
         GetDataFromAPI(dataUser.uid);
+        GetBarangFromAPI();
+    }
+
+    getImageFromAPI = (img) => {
+        const { image } = this.props;
+        const gambar = image.filter(data => data.id == img);
+        return gambar;
     }
 
     render() {
         const { barang } = this.props;
+        const { getImageFromAPI } = this;
         return (
             <div className="component-wrapper mb-5">
                 <div className="container d-flex flex-column">
@@ -31,10 +38,11 @@ class Dashboard extends Component {
                     </div>
                     <div className="body mt-5 d-flex flex-wrap justify-content-center align-items-center">
                         {
-                            barang.map(brg => {
+                            barang.map((brg, key) => {
+                                console.log(getImageFromAPI(brg.data.img));
                                 return (
-                                    <Card style={{ width: '18rem' }} className="me-3 mt-4">
-                                        <Card.Img variant="top" src="https://images.unsplash.com/photo-1657214059169-c01172e56be0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8OHx8cHJvZHVjdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" />
+                                    <Card style={{ width: '18rem' }} className="me-3 mt-4" key={key}>
+                                        <Card.Img variant="top" src={getImageFromAPI(brg.data.img)[0].img} />
                                         <Card.Body>
                                             <Card.Title>{brg.data.nama_barang}</Card.Title>
                                             <Card.Text className="text-danger">Rp. {brg.data.harga}</Card.Text>
@@ -54,10 +62,12 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => ({
     barang: state.data,
+    image : state.image
 })
 
 const mapDispatchToProps = (dispatch) => ({
     GetDataFromAPI: (userId) => dispatch(GetDataFromAPI(userId)),
+    GetBarangFromAPI : (image) => dispatch(getBarangFromAPI(image))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

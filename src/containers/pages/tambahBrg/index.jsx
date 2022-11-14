@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postDataAPI } from "../../../config/redux/actions";
-import postToFirebase from "../../../config/redux/actions/postImage";
+import {postToFirebase} from "../../../config/redux/actions/postImage";
 
 class TambahBarang extends Component {
 

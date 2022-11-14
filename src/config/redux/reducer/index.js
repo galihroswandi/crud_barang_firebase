@@ -4,7 +4,7 @@ const initialState = {
     isLoading : false,
     user : '',
     data : [],
-    image : ''
+    image : []
 }
 
 const reducer = (state = initialState, action) => {

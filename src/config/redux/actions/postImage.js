@@ -27,36 +27,13 @@ export const getBarangFromAPI = () => (dispatch) => {
             })
 
             const gambar = [];
-            for(let i = 0; i < result.length; i++){
+            for (let i = 0; i < result.length; i++) {
                 let imageRef = ref(storage, `Barang/${result[i]}`);
                 getDownloadURL(imageRef)
-                .then(response => {
-                    gambar.push({id : result[i], img : response});
-                })
+                    .then(response => {
+                        gambar.push({ id: result[i], img: response });
+                    })
             }
-            dispatch({type : "SET_IMAGE", value : gambar});
+            dispatch({ type: "SET_IMAGE", value: gambar });
         })
-
-    // const imageRef = ref(storage, `Barang/${item.name}`);
-    // getDownloadURL(imageRef)
-    //     .then(res => {
-    //         Object.keys(res).map(data => {
-    //             result.push({
-    //                 id: item.name,
-    //                 image: data
-    //             })
-    //         })
-    //     })
-    //     getDownloadURL(imageRef)
-    //         .then(response => {
-    //             const result = [];
-    //             Object.keys(response).map(res => {
-    //                 result.push({
-    //                     id : uid,
-    //                     image : response
-    //                 })
-    //             })
-    //             dispatch({type : 'SET_IMAGE', value : result})
-    //         })
-    //         .catch(err => err)
 }

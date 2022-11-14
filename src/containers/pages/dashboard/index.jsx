@@ -23,7 +23,11 @@ class Dashboard extends Component {
     getImageFromAPI = (img) => {
         const { image } = this.props;
         const gambar = image.filter(data => data.id == img);
-        return gambar;
+        try{
+            return gambar[0].img;
+        }catch(err){
+            return null;
+        }
     }
 
     render() {
@@ -39,10 +43,9 @@ class Dashboard extends Component {
                     <div className="body mt-5 d-flex flex-wrap justify-content-center align-items-center">
                         {
                             barang.map((brg, key) => {
-                                console.log(getImageFromAPI(brg.data.img));
                                 return (
                                     <Card style={{ width: '18rem' }} className="me-3 mt-4" key={key}>
-                                        <Card.Img variant="top" src={getImageFromAPI(brg.data.img)[0].img} />
+                                        <Card.Img variant="top" src={getImageFromAPI(brg.data.img)} />
                                         <Card.Body>
                                             <Card.Title>{brg.data.nama_barang}</Card.Title>
                                             <Card.Text className="text-danger">Rp. {brg.data.harga}</Card.Text>
@@ -62,12 +65,12 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => ({
     barang: state.data,
-    image : state.image
+    image: state.image
 })
 
 const mapDispatchToProps = (dispatch) => ({
     GetDataFromAPI: (userId) => dispatch(GetDataFromAPI(userId)),
-    GetBarangFromAPI : (image) => dispatch(getBarangFromAPI(image))
+    GetBarangFromAPI: (image) => dispatch(getBarangFromAPI(image))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

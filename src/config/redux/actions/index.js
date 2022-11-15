@@ -1,21 +1,17 @@
 import firebase from "./../../firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, push, ref, onValue } from "firebase/database";
-import postToFirebase from "./postImage";
 
 export const registerUserAPI = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
         const auth = getAuth(firebase);
         dispatch({ type: "CHANGE_LOADING", value: true });
         createUserWithEmailAndPassword(auth, data.email, data.password)
-            .then((response) => {
-                console.log(response);
+            .then(() => {
                 dispatch({ type: "CHANGE_LOADING", value: false });
                 resolve(true);
             })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+            .catch(() => {
                 dispatch({ type: "CHANGE_LOADING", value: false });
                 reject(false);
             });
@@ -62,12 +58,12 @@ export const postDataAPI = (data) => (dispatch) => {
             desc: data.desc,
             img: data.img
         })
-        .then(response => {
-            resolve(true);
-        })
-        .catch(err => {
-            reject(false);
-        })
+            .then(() => {
+                resolve(true);
+            })
+            .catch(() => {
+                reject(false);
+            })
     })
 }
 

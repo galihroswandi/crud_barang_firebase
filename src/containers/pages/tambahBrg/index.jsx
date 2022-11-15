@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postDataAPI } from "../../../config/redux/actions";
-import {postToFirebase} from "../../../config/redux/actions/postImage";
+import { postToFirebase } from "../../../config/redux/actions/postImage";
 
 class TambahBarang extends Component {
 
@@ -13,13 +13,14 @@ class TambahBarang extends Component {
         image: ''
     }
 
-    handleSubmit = () => {
+    handleSubmit = async () => {
         const { nama, jumlah, harga, desc, image } = this.state;
         const { postAPI, postImage } = this.props;
 
         const dataUser = JSON.parse(localStorage.getItem('User'));
 
-        postImage(image)
+        // Tambahkan Data Ke Firebase Storage
+        await postImage(image)
             .then(response => {
                 const data = {
                     userId: dataUser.uid,
@@ -28,18 +29,23 @@ class TambahBarang extends Component {
                     jumlah: jumlah,
                     harga: harga,
                     desc: desc,
-                    img: this.props.image
+                    img: response
                 }
+
+                // Tambahkan Data Ke API
                 postAPI(data)
-                .then(response => {
-                    this.setState({
-                        nama : '',
-                        jumlah : '',
-                        harga : '',
-                        desc : '',
-                        image : ''
+                    .then(response => {
+                        this.setState({
+                            nama: '',
+                            jumlah: '',
+                            harga: '',
+                            desc: '',
+                            image: ''
+                        })
                     })
-                })
+            })
+            .catch(err => {
+                console.log(err);
             })
     }
 
@@ -57,7 +63,7 @@ class TambahBarang extends Component {
 
 
     render() {
-        const { nama, jumlah, harga, desc, image } = this.state;
+        const { nama, jumlah, harga, desc } = this.state;
         return (
             <div className="container">
                 <div className="wrapper">
@@ -102,7 +108,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     postAPI: (data) => dispatch(postDataAPI(data)),
-    postImage: (data) => dispatch(postToFirebase(data))
+    postImage: (data) => dispatch(postToFirebase(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TambahBarang);

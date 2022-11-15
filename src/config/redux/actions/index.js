@@ -1,6 +1,6 @@
 import firebase from "./../../firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, push, ref, onValue } from "firebase/database";
+import { getDatabase, push, ref, onValue, set } from "firebase/database";
 
 export const registerUserAPI = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
@@ -83,5 +83,25 @@ export const GetDataFromAPI = (userId) => (dispatch) => {
             })
             dispatch({ type: "SET_DATA", value: result })
         });
+    })
+}
+
+export const UpdateDataFromAPI = (data) => (dispatch) => {
+    const db = getDatabase();
+    const linkRef = ref(db, `Barang/${data.userId}/${data.barangId}`);
+    return new Promise ((resolve, reject) => {
+        set(linkRef, {
+            nama_barang : data.nama_barang,
+            harga : data.harga,
+            jumlah : data.jumlah,
+            desc : data.desc,
+            img : data.img
+        })
+        .then(response => {
+            resolve(true);
+        })
+        .catch(err => {
+            reject(err);
+        })
     })
 }

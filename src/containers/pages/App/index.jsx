@@ -13,6 +13,7 @@ import TambahBarang from '../tambahBrg';
 
 // Component
 import NavbarComponent from '../../../components/molecule/navbar';
+import UbahBarang from '../ubahBarang';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/tambah_brg' element={<TambahBarang />} />
+          <Route path='/ubah_barang/:id' element={<UbahBarang  />} />
         </Routes>
       </Router>
     </Provider>

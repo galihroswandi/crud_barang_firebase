@@ -1,6 +1,6 @@
 import firebase from "./../../firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, push, ref, onValue, set } from "firebase/database";
+import { getDatabase, push, ref, onValue, set, child, get } from "firebase/database";
 
 export const registerUserAPI = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
@@ -51,13 +51,13 @@ export const postDataAPI = (data) => (dispatch) => {
     const db = getDatabase();
     return new Promise((resolve, reject) => {
         push(ref(db, 'Barang/' + data.userId), {
-            id_barang: data.id_barang,
-            nama_barang: data.nama_barang,
-            jumlah: data.jumlah,
-            harga: data.harga,
-            desc: data.desc,
-            img: data.img
-        })
+                id_barang: data.id_barang,
+                nama_barang: data.nama_barang,
+                jumlah: data.jumlah,
+                harga: data.harga,
+                desc: data.desc,
+                img: data.img
+            })
             .then(() => {
                 resolve(true);
             })
@@ -86,22 +86,34 @@ export const GetDataFromAPI = (userId) => (dispatch) => {
     })
 }
 
+export const GetSingleData = (id, userId) => (dispatchEvent) => {
+    const db = getDatabase();
+    const linkRef = ref(db, `Barang/${userId}/${id}`);
+    return new Promise((resolve, reject) => {
+        get(linkRef).then((snapshot) => {
+            resolve(snapshot.val());
+        }).catch((error) => {
+            console.error(error);
+        });
+    })
+}
+
 export const UpdateDataFromAPI = (data) => (dispatch) => {
     const db = getDatabase();
     const linkRef = ref(db, `Barang/${data.userId}/${data.barangId}`);
-    return new Promise ((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         set(linkRef, {
-            nama_barang : data.nama_barang,
-            harga : data.harga,
-            jumlah : data.jumlah,
-            desc : data.desc,
-            img : data.img
-        })
-        .then(response => {
-            resolve(true);
-        })
-        .catch(err => {
-            reject(err);
-        })
+                nama_barang: data.nama_barang,
+                harga: data.harga,
+                jumlah: data.jumlah,
+                desc: data.desc,
+                img: data.img
+            })
+            .then(response => {
+                resolve(true);
+            })
+            .catch(err => {
+                reject(err);
+            })
     })
 }

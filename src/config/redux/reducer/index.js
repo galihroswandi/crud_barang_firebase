@@ -4,8 +4,6 @@ const initialState = {
     isLoading: false,
     user: '',
     data: [],
-    image: [],
-    images: {}
 }
 
 const reducer = (state = initialState, action) => {
@@ -34,16 +32,6 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 data: action.value
-            }
-        case 'SET_IMAGE':
-            return {
-                ...state,
-                image: action.value
-            }
-        case 'SET_IMAGES':
-            return{
-                ...state,
-                images : action.value
             }
         default:
             return state;

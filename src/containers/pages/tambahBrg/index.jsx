@@ -29,7 +29,10 @@ class TambahBarang extends Component {
                     jumlah: jumlah,
                     harga: harga,
                     desc: desc,
-                    img: response
+                    img: {
+                        imgName: response.imgName,
+                        imgUrl: response.imgUrl
+                    }
                 }
 
                 // Tambahkan Data Ke API

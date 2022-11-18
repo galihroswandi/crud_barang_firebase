@@ -2,13 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { GetDataFromAPI } from "./../../../config/redux/actions";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 class Dashboard extends Component {
-    state = {
-        image: "",
-        url: "",
-    };
 
     componentDidMount() {
         const dataUser = JSON.parse(localStorage.getItem("User"));
@@ -17,22 +13,8 @@ class Dashboard extends Component {
         GetDataFromAPI(dataUser.uid);
     }
 
-    ubahBarang = (data) => {
-        const { SetDataUpdate } = this.props;
-        const brg = {
-            nama_barang: data.data.nama_barang,
-            jumlah: data.data.jumlah,
-            harga: data.data.harga,
-            desc: data.data.desc,
-            img: data.data.img,
-            textButton : "UPDATE"
-        };
-        SetDataUpdate(brg);
-    };
-
     render() {
         const { barang } = this.props;
-        const { ubahBarang } = this;
         return (
             <div className="component-wrapper mb-5">
                 <div className="container d-flex flex-column">
@@ -44,6 +26,7 @@ class Dashboard extends Component {
                     </div>
                     <div className="body mt-5 d-flex flex-wrap justify-content-center align-items-center">
                         {barang.map((brg, key) => {
+
                             return (
                                 <Card
                                     style={{ width: "18rem" }}
@@ -53,7 +36,7 @@ class Dashboard extends Component {
                                     <Card.Img
                                         variant="top"
                                         id="card-img"
-                                        src={brg.data.img}
+                                        src={brg.data.img.imgUrl}
                                     />
                                     <Card.Body>
                                         <Card.Title>
@@ -64,6 +47,7 @@ class Dashboard extends Component {
                                         </Card.Text>
                                         <Card.Text>{brg.data.desc}</Card.Text>
                                         <Link
+                                            className="btn btn-dark"
                                             variant="dark"
                                             to={`/ubah_barang/${brg.id}`}
                                         >
@@ -86,7 +70,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     GetDataFromAPI: (userId) => dispatch(GetDataFromAPI(userId)),
-    SetDataUpdate : (data) => dispatch({type : 'SET_DATA', value : data})
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -5,13 +5,16 @@ import {
     GetSingleData,
     UpdateDataFromAPI,
 } from "../../../config/redux/actions";
+import { deleteImgFromAPI, postToFirebase } from "../../../config/redux/actions/postImage";
 
-const UbahBarang = ({ getSingleData, saveUpdate }) => {
+const UbahBarang = ({ getSingleData, saveUpdate, updateImg, deleteImgLama }) => {
     let { id } = useParams();
     const [change, setChange] = useState(false);
     const [namaBarang, setNamaBarang] = useState();
     const [jumlah, setJumlah] = useState();
-    const [img, setImg] = useState();
+    const [imgLama, setImgLama] = useState();
+    const [imgLamaName, setImgLamaName] = useState();
+    const [newImg, setNewImg] = useState();
     const [harga, setHarga] = useState();
     const [desc, setDesc] = useState();
     const [idBarang, setIdBarang] = useState();
@@ -23,30 +26,44 @@ const UbahBarang = ({ getSingleData, saveUpdate }) => {
                 if (change == false) {
                     setNamaBarang(response.nama_barang);
                     setJumlah(response.jumlah);
-                    setImg(response.img);
+                    setImgLama(response.img.imgUrl);
+                    setImgLamaName(response.img.imgName);
                     setHarga(response.harga);
                     setDesc(response.desc);
-                    setIdBarang(response.id_barang);
+                    setIdBarang(id);
                 }
             }
         );
     });
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const dataUser = JSON.parse(localStorage.getItem('User'));
-        const data = {
-            nama_barang: namaBarang,
-            harga: harga,
-            jumlah: jumlah,
-            desc: desc,
-            img: img,
-            userId : dataUser.uid,
-            barangId : idBarang
-        };
-        // saveUpdate(data).then((response) => {
-        //     console.log(response);
-        // });
-        // setChange(false);
+        if (newImg) {
+            await updateImg(newImg)
+                .then(response => {
+                    const data = {
+                        nama_barang: namaBarang,
+                        harga: harga,
+                        jumlah: jumlah,
+                        desc: desc,
+                        userId: dataUser.uid,
+                        barangId: idBarang,
+                        img: {
+                            imgName : response.imgName,
+                            imgUrl : response.imgUrl
+                        }
+
+                    };
+                    saveUpdate(data).then((response) => {
+                        deleteImgLama(imgLamaName).then(result => {
+                            console.log(result);
+                        })
+                    });
+                })
+        }else{
+            
+        }
+
     };
 
     return (
@@ -115,7 +132,7 @@ const UbahBarang = ({ getSingleData, saveUpdate }) => {
                     <div className="form-text d-flex flex-column mb-3">
                         <label htmlFor="desc">Gambar</label>
                         <img
-                            src={img}
+                            src={imgLama}
                             alt="Image Error"
                             style={{ width: "10rem" }}
                         />
@@ -124,6 +141,10 @@ const UbahBarang = ({ getSingleData, saveUpdate }) => {
                             name="image"
                             id="image"
                             autoComplete="off"
+                            onChange={(e) => {
+                                setChange(true);
+                                return setNewImg(e.target.files[0])
+                            }}
                         />
                     </div>
                     <div className="button">
@@ -142,6 +163,8 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
     getSingleData: (id, userId) => dispatch(GetSingleData(id, userId)),
     saveUpdate: (data) => dispatch(UpdateDataFromAPI(data)),
+    updateImg: (data) => dispatch(postToFirebase(data)),
+    deleteImgLama: (imgLama) => dispatch(deleteImgFromAPI(imgLama))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UbahBarang);

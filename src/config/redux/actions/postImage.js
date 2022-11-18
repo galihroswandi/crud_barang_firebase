@@ -1,5 +1,5 @@
 import { storage } from "../../firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 export const postToFirebase = (dataImage) => (dispatch) => {
     const imageName = new Date().getTime();
@@ -9,7 +9,11 @@ export const postToFirebase = (dataImage) => (dispatch) => {
             .then(() => {
                 getDownloadURL(imgRef)
                     .then(imgUrl => {
-                        resolve(imgUrl);
+                        const data = {
+                            imgName : imageName,
+                            imgUrl : imgUrl
+                        }
+                        resolve(data);
                     })
                     .catch(err => {
                         console.log(err);
@@ -18,6 +22,22 @@ export const postToFirebase = (dataImage) => (dispatch) => {
             .catch(err => {
                 console.log(err);
                 reject(false);
+            })
+    })
+}
+
+export const deleteImgFromAPI = (imgLama) => (dispatch) => {
+    const storage = getStorage();
+
+    const desertRef = ref(storage, `Barang/${imgLama}`);
+
+    return new Promise((resolve, reject) => {
+        deleteObject(desertRef)
+            .then(() => {
+                resolve(true);
+            })
+            .catch(err => {
+                reject(err)
             })
     })
 }

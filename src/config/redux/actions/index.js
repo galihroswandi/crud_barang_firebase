@@ -51,13 +51,13 @@ export const postDataAPI = (data) => (dispatch) => {
     const db = getDatabase();
     return new Promise((resolve, reject) => {
         push(ref(db, 'Barang/' + data.userId), {
-                id_barang: data.id_barang,
-                nama_barang: data.nama_barang,
-                jumlah: data.jumlah,
-                harga: data.harga,
-                desc: data.desc,
-                img: data.img
-            })
+            id_barang: data.id_barang,
+            nama_barang: data.nama_barang,
+            jumlah: data.jumlah,
+            harga: data.harga,
+            desc: data.desc,
+            img: data.img
+        })
             .then(() => {
                 resolve(true);
             })
@@ -100,20 +100,21 @@ export const GetSingleData = (id, userId) => (dispatchEvent) => {
 
 export const UpdateDataFromAPI = (data) => (dispatch) => {
     const db = getDatabase();
-    const linkRef = ref(db, `Barang/${data.userId}/${data.barangId}`);
+    const url = ref(db, `Barang/${data.userId}/${data.barangId}`);
     return new Promise((resolve, reject) => {
-        set(linkRef, {
-                nama_barang: data.nama_barang,
-                harga: data.harga,
-                jumlah: data.jumlah,
-                desc: data.desc,
-                img: data.img
-            })
+        set(url, {
+            nama_barang: data.nama_barang,
+            harga: data.harga,
+            jumlah: data.jumlah,
+            desc: data.desc,
+            userId: data.userId,
+            img: data.img
+        })
             .then(response => {
                 resolve(true);
             })
-            .catch(err => {
-                reject(err);
+            .catch(error => {
+                reject(false);
             })
     })
 }

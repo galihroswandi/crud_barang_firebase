@@ -1,6 +1,6 @@
 import firebase from "./../../firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, push, ref, onValue, set, child, get } from "firebase/database";
+import { getDatabase, push, ref, onValue, set, child, get, remove } from "firebase/database";
 
 export const registerUserAPI = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {
@@ -116,5 +116,15 @@ export const UpdateDataFromAPI = (data) => (dispatch) => {
             .catch(error => {
                 reject(false);
             })
+    })
+}
+
+export const DeleteDataFromAPI = (data) => (dispatch) => {
+    const db = getDatabase();
+    const url = ref(db, `Barang/${data.userId}/${data.barangId}`);
+    return new Promise((resolve, reject) => {
+        remove(url).then(() => {
+            resolve(true);
+        })
     })
 }

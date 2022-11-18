@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import "./dashboard.css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { GetDataFromAPI } from "./../../../config/redux/actions";
+import { DeleteDataFromAPI, GetDataFromAPI } from "./../../../config/redux/actions";
 import { Card } from "react-bootstrap";
+import { deleteImgFromAPI } from "../../../config/redux/actions/postImage";
 
 class Dashboard extends Component {
 
@@ -13,8 +15,23 @@ class Dashboard extends Component {
         GetDataFromAPI(dataUser.uid);
     }
 
+    handleDelete = async (id, img) => {
+        const { DeleteDataFromAPI, DeleteImg } = this.props;
+        const dataUser = JSON.parse(localStorage.getItem('User'));
+        const data = {
+            userId: dataUser.uid,
+            barangId: id
+        }
+        if (window.confirm('Apakah Yakin Ingin Menghapus ?')) {
+            await DeleteDataFromAPI(data).then(() => {
+                DeleteImg(img)
+            })
+        }
+    }
+
     render() {
         const { barang } = this.props;
+        const { handleDelete } = this;
         return (
             <div className="component-wrapper mb-5">
                 <div className="container d-flex flex-column">
@@ -26,13 +43,15 @@ class Dashboard extends Component {
                     </div>
                     <div className="body mt-5 d-flex flex-wrap justify-content-center align-items-center">
                         {barang.map((brg, key) => {
-
                             return (
                                 <Card
                                     style={{ width: "18rem" }}
                                     className="me-3 mt-4"
                                     key={key}
                                 >
+                                    <div className="btn-del position-absolute end-0 top-0 fs-5 fw-bold py-0 px-2 text-white" onClick={() => handleDelete(brg.id, brg.data.img.imgName)}>
+                                        X
+                                    </div>
                                     <Card.Img
                                         variant="top"
                                         id="card-img"
@@ -70,6 +89,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     GetDataFromAPI: (userId) => dispatch(GetDataFromAPI(userId)),
+    DeleteDataFromAPI: (data) => dispatch(DeleteDataFromAPI(data)),
+    DeleteImg: (img) => dispatch(deleteImgFromAPI(img))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

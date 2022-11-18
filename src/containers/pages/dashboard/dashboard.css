@@ -1,0 +1,7 @@
+.btn-del{
+    background-color: rgba(250, 0, 0, .9);
+    border-radius: 50%;
+    right: -.6rem !important;
+    top: -.6rem !important;
+    cursor: pointer;
+}

@@ -49,8 +49,8 @@ const UbahBarang = ({ getSingleData, saveUpdate, updateImg, deleteImgLama }) => 
                         userId: dataUser.uid,
                         barangId: idBarang,
                         img: {
-                            imgName : response.imgName,
-                            imgUrl : response.imgUrl
+                            imgName: response.imgName,
+                            imgUrl: response.imgUrl
                         }
 
                     };
@@ -60,8 +60,8 @@ const UbahBarang = ({ getSingleData, saveUpdate, updateImg, deleteImgLama }) => 
                         })
                     });
                 })
-        }else{
-            
+        } else {
+
         }
 
     };

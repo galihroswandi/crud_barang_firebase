@@ -14,7 +14,7 @@
     border-radius: .5rem;
 }
 
-.navbar-nav>ul>li:nth-child(1):hover, .navbar-nav>ul>li:nth-child(2):hover{
+.navbar-nav>ul>li:nth-child(1):hover, .navbar-nav>ul>li:nth-child(2):hover, .navbar-nav>ul>li:nth-child(3):hover{
     background-color: rgba(132, 99, 239, .8);
     transition: all .2s ease-in-out;
 }

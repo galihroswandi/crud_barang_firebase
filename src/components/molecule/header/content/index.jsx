@@ -18,7 +18,7 @@ const Content = () => {
                             <p className="desc text-white mb-4">is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsumis a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum
                             </p>
                             <div className="explod">
-                                <a href="#" className="btn btn-primary py-2 px-5">Explore</a>
+                                <a href="#navigator" className="btn btn-primary py-2 px-5">Explore</a>
                             </div>
                         </div>
                         <div className="col-5 mt-5 ps-5 pt-5">  

@@ -9,9 +9,8 @@ import Plus from "./../../../../assets/icons/plus.svg";
 import { connect } from "react-redux";
 
 const Products = (props) => {
-    console.log(props.barang);
     return (
-        <div className="products-wrapper mt-5" id="products">
+        <div className="products-wrapper mt-5 mb-5" id="products">
             <Container>
                 <Container fluid>
                     <div className="row">
@@ -42,9 +41,9 @@ const Products = (props) => {
                                             <Link to={`/ubah_barang/${brg.id}`} className="change pb-2 link">
                                                 <img src={Ubah} alt="Ubah Product" className="ms-5" />
                                             </Link>
-                                            <Link className="delete link">
+                                            <div className="delete link" onClick={() => props.handleDelete(brg.id, brg.data.img.imgName)}>
                                                 <img src={Delete} alt="Hapus Product" className=" ms-5" />
-                                            </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 )

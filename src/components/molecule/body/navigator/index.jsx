@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const NavigatorComponent = () => {
     return(
-        <div className="navigation-wrapper mt-5">
+        <div className="navigation-wrapper mt-5" id="navigator">
             <Container>
                 <Container fluid>
                     <div className="row mt-5 d-grid gap-5 d-flex justify-content-center">

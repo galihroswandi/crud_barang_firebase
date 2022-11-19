@@ -19,6 +19,7 @@
 
 .change:hover, .delete:hover{
     background-color: var(--primary-button);
+    cursor: pointer;
 }
 
 .vertical {

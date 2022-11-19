@@ -2,11 +2,11 @@ import React from "react";
 import NavigatorComponent from "./navigator";
 import Products from "./products";
 
-const BodyComponent = () => {
+const BodyComponent = (props) => {
     return (
         <div>
             <NavigatorComponent />
-            <Products />
+            <Products handleDelete={(id, img) => props.handleDelete(id, img)} />
         </div>
     )
 }

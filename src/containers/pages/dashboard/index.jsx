@@ -5,6 +5,8 @@ import { DeleteDataFromAPI, GetDataFromAPI } from "./../../../config/redux/actio
 import { deleteImgFromAPI } from "../../../config/redux/actions/postImage";
 import Header from "../../../components/molecule/header";
 import BodyComponent from "../../../components/molecule/body";
+import FooterComponent from "../../../components/molecule/footer";
+import Swal from 'sweetalert2';
 
 class Dashboard extends Component {
 
@@ -16,17 +18,33 @@ class Dashboard extends Component {
     }
 
     handleDelete = async (id, img) => {
-        const { DeleteDataFromAPI, DeleteImg } = this.props;
-        const dataUser = JSON.parse(localStorage.getItem('User'));
-        const data = {
-            userId: dataUser.uid,
-            barangId: id
-        }
-        if (window.confirm('Apakah Yakin Ingin Menghapus ?')) {
-            await DeleteDataFromAPI(data).then(() => {
-                DeleteImg(img)
-            })
-        }
+        await Swal.fire({
+            title: 'Delete ?',
+            text: "Deleting data will be permanent automatically",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#8463EF',
+            cancelButtonColor: '#DADEE0',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { DeleteDataFromAPI, DeleteImg } = this.props;
+                const dataUser = JSON.parse(localStorage.getItem('User'));
+                const data = {
+                    userId: dataUser.uid,
+                    barangId: id
+                }
+                DeleteDataFromAPI(data).then(() => {
+                    DeleteImg(img).then(() => {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    })
+                })
+            }
+        })
     }
 
     render() {
@@ -35,7 +53,8 @@ class Dashboard extends Component {
         return (
             <div className="component-wrapper mb-5">
                 <Header />
-                <BodyComponent />
+                <BodyComponent handleDelete={(id, img) => handleDelete(id, img)} />
+                <FooterComponent />
                 {/* <div className="container d-flex flex-column">
                     <div className="div-header d-flex justify-content-around align-items-center mt-4">
                         <h1 className="me-5">Daftar barang</h1>

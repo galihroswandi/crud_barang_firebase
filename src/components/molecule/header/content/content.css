@@ -1,0 +1,28 @@
+.content-wrapper {
+    margin: 120px auto;
+}
+
+.title {
+    font-size: 24px;
+}
+
+.hed-body>h1 {
+    font-size: 4em;
+    font-weight: 600;
+}
+
+.hed-body>p {
+    font-weight: 400;
+}
+
+.btn-primary {
+    background-color: var(--primary-button);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-button);
+    box-shadow: 0 0 .5rem var(--primary-button);
+    margin-top: -.06rem;
+    transition: all .5s ease;
+}

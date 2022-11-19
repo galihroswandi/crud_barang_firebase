@@ -1,0 +1,5 @@
+.bg-secondary{
+    background-color: var(--secondary-color) !important;
+    border-radius: .9rem;
+    box-shadow: 0 0 10px 5px var(--shadow-color);
+}

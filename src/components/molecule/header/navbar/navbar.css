@@ -1,0 +1,20 @@
+.text-white {
+    color: var(--text-white) !important;
+}
+
+.text-primary {
+    color: var(--primary-button) !important;
+}
+
+.navbar-nav>ul>li {
+    border-radius: .5rem;
+}
+
+.navbar-nav>ul>li:nth-child(1) {
+    border-radius: .5rem;
+}
+
+.navbar-nav>ul>li:nth-child(1):hover, .navbar-nav>ul>li:nth-child(2):hover{
+    background-color: rgba(132, 99, 239, .8);
+    transition: all .2s ease-in-out;
+}

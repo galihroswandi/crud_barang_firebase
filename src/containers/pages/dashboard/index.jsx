@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import "./dashboard.css";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { DeleteDataFromAPI, GetDataFromAPI } from "./../../../config/redux/actions";
-import { Card } from "react-bootstrap";
 import { deleteImgFromAPI } from "../../../config/redux/actions/postImage";
+import Header from "../../../components/molecule/header";
+import BodyComponent from "../../../components/molecule/body";
 
 class Dashboard extends Component {
 
     componentDidMount() {
         const dataUser = JSON.parse(localStorage.getItem("User"));
         const { GetDataFromAPI } = this.props;
-
+        document.title = "CRUDApps - Dashboard";
         GetDataFromAPI(dataUser.uid);
     }
 
@@ -34,7 +34,9 @@ class Dashboard extends Component {
         const { handleDelete } = this;
         return (
             <div className="component-wrapper mb-5">
-                <div className="container d-flex flex-column">
+                <Header />
+                <BodyComponent />
+                {/* <div className="container d-flex flex-column">
                     <div className="div-header d-flex justify-content-around align-items-center mt-4">
                         <h1 className="me-5">Daftar barang</h1>
                         <Link to="/tambah_brg" className="btn btn-dark ms-5">
@@ -77,7 +79,7 @@ class Dashboard extends Component {
                             );
                         })}
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

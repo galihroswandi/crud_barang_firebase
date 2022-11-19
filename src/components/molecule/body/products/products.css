@@ -1,0 +1,28 @@
+.cardComp {
+    background-color: var(--secondary-color);
+    border-radius: 0.625rem;
+    box-shadow: 0 0 5px 5px var(--shadow-color);
+}
+
+.change{
+    width: 50%;
+    border-right: .01rem solid var(--text-white);
+}
+
+.change>.link>img{
+    margin: 0 auto;
+}
+
+.delete{
+    width: 50%;
+}
+
+.change:hover, .delete:hover{
+    background-color: var(--primary-button);
+}
+
+.vertical {
+    height: 2rem;
+    background-color: var(--text-white);
+    width: .5px;
+}

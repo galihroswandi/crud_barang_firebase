@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./products.css";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ImgDummy1 from "./../../../../assets/img/img-dummy-1.png";
 import Ubah from './../../../../assets/icons/ubah.svg';
 import Delete from "./../../../../assets/icons/delete.svg";
 import Plus from "./../../../../assets/icons/plus.svg";
@@ -28,20 +27,20 @@ const Products = (props) => {
                         {
                             props.barang.map((brg, key) => {
                                 return (
-                                    <div className="col-2 ms-5 mt-5 cardComp px-0 position-relative overflow-hidden">
+                                    <div key={key} className="card-wrapper col-2 ms-5 mt-5 cardComp px-0 position-relative overflow-hidden" style={{maxHeight : '25rem'}}>
                                         <div className="card-header mb-4">
                                             <img src={brg.data.img.imgUrl} alt="Product" width="100%" />
                                         </div>
-                                        <div className="card-body px-3 mb-4 position-relative"
-                                            style={{ height: "9rem" }}>
-                                            <h1 className="text-white mb-4 fs-5">{brg.data.nama_barang}</h1>
-                                            <p className="text-white fs-5 text-primary lh-lg position-absolute bottom-0">Rp. {brg.data.harga}</p>
+                                        <div className="card-body px-3 mb-4 position-relative pt-2 border-box"
+                                            style={{ height: "9rem", borderTop : '.01rem solid var(--primary-color)' }}>
+                                            <h1 className="text-white fs-6">{brg.data.nama_barang}</h1>
+                                            <p className="text-white fs-5 text-primary lh-lg position-absolute bottom-0" style={{ top : '3.5rem'}}>Rp. {brg.data.harga}</p>
                                         </div>
                                         <div className="card-footer d-flex justify-content-between mt-4 position-absolute bottom-0 start-0 end-0">
-                                            <Link to={`/ubah_barang/${brg.id}`} className="change pb-2 link">
+                                            <Link to={`/ubah_barang/${brg.id}`} className="change py-2 link">
                                                 <img src={Ubah} alt="Ubah Product" className="ms-5" />
                                             </Link>
-                                            <div className="delete link" onClick={() => props.handleDelete(brg.id, brg.data.img.imgName)}>
+                                            <div className="delete link py-2" onClick={() => props.handleDelete(brg.id, brg.data.img.imgName)}>
                                                 <img src={Delete} alt="Hapus Product" className=" ms-5" />
                                             </div>
                                         </div>

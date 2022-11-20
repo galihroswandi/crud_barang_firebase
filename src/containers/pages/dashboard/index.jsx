@@ -35,13 +35,12 @@ class Dashboard extends Component {
                     barangId: id
                 }
                 DeleteDataFromAPI(data).then(() => {
-                    DeleteImg(img).then(() => {
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        )
-                    })
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                    DeleteImg(img)
                 })
             }
         })

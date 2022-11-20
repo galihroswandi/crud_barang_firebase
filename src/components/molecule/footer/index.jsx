@@ -15,7 +15,7 @@ const FooterComponent = () => {
                             <p className="text-white">&copy; <span>2022-GalihRoswandi</span></p>
                         </div>
                         <div className="col-3 offset-6 d-flex gap-3">
-                            <a href="https://web.facebook.com/galih.popayy/" target='blank'>
+                            <a>
                                 <img src={Facebook} alt="Facebook" />
                             </a>
                             <a href="https://www.instagram.com/galihrswnd/" target="blank">

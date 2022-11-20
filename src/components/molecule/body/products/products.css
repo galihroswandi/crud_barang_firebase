@@ -4,20 +4,26 @@
     box-shadow: 0 0 5px 5px var(--shadow-color);
 }
 
-.change{
+.change {
     width: 50%;
     border-right: .01rem solid var(--text-white);
 }
 
-.change>.link>img{
+.change>.link>img {
     margin: 0 auto;
 }
 
-.delete{
+.delete {
     width: 50%;
 }
 
-.change:hover, .delete:hover{
+.card-footer {
+    background-color: var(--primary-color);
+    min-height: 2rem;
+}
+
+.change:hover,
+.delete:hover {
     background-color: var(--primary-button);
     cursor: pointer;
 }
@@ -26,4 +32,15 @@
     height: 2rem;
     background-color: var(--text-white);
     width: .5px;
+}
+
+.card-wrapper {
+    transition: all .5s ease-in-out;
+
+}
+
+.card-wrapper:hover {
+    cursor: pointer;
+    transform: translate(0, -.3rem);
+    transition: transform .5s ease-in-out;
 }

@@ -1,0 +1,97 @@
+.bg-primary-button {
+    background-color: var(--primary-button);
+}
+
+.text-dark {
+    color: var(--text-dark) !important;
+}
+
+.form-wrapper-component {
+    background-color: var(--secondary-color);
+    min-width: 65%;
+    box-shadow: 0 0 8px var(--primary-button);
+    border-radius: 0 0 18px 18px;
+    padding-bottom: 2rem;
+}
+
+.header {
+    border-radius: 0 0 5.5rem 5.5rem;
+}
+
+.body{
+    margin-top: 4.5rem !important;
+    margin-bottom: 3rem !important;
+}
+
+.body>.form-floating>input {
+    background-color: var(--primary-color);
+    border: none;
+    box-shadow: 0 0 .1rem var(--primary-button);
+    border-radius: 15px;
+    color: var(--text-white);
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-inline: 2.1rem !important;
+}
+
+.body>.form-floating>label {
+    color: var(--text-dark);
+    margin-left: .8rem !important;
+    margin-top: .01rem !important;
+}
+
+.body>.form-floating>.form>label>a {
+    background-color: var(--primary-color);
+    box-shadow: 0 0 .1rem var(--primary-button);
+    border-radius: 15px;
+    min-width: 12rem;
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+}
+
+.body>.form-floating>.form>label>a>div>img {
+    margin-left: -.5rem;
+}
+
+.form-floating>textarea {
+    width: 100%;
+    min-height: 10rem;
+    border-radius: 15px;
+    background-color: var(--primary-color);
+    border: none;
+    box-shadow: 0 0 .1rem var(--primary-button);
+    padding-top: 2.1rem !important;
+    padding-bottom: 1rem !important;
+    padding-inline: 2.1rem !important;
+}
+
+.form-floating>textarea:active,
+textarea:focus, input:active, input:focus {
+    border: none !important;
+    box-shadow: 0 0 .3rem var(--primary-button) !important;
+    background-color: var(--primary-color) !important;
+}
+
+.button {
+    width: 100%;
+}
+
+.button>a {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.btn-primary:hover{
+    margin-top: 0 !important;
+}
+
+.btn-danger{
+    background-color: var(--primary-color) !important;
+    border: none;
+    box-shadow: 0 0 .1rem var(--primary-button);
+}
+
+.btn-danger:hover{
+    box-shadow: 0 0 .5rem var(--primary-button);
+    transition: all .5s ease;
+}

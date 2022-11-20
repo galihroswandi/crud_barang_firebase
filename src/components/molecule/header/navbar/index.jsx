@@ -13,11 +13,11 @@ const NavbarComponent = () => {
                 </div>
                 <div className="navbar-nav">
                     <ul className="d-flex justify-content-center align-items-center d-grid gap-3 me-4">
-                        <li className="list-group-item py-1 px-3"><Link href="/" className="text-white text-decoration-none fs-5 fw-normal">Home</Link></li>
-                        <li className="list-group-item py-1 px-3"><a href="#products" className="text-white text-decoration-none fs-5 fw-normal">Product</a></li>
-                        <li className="list-group-item py-1 px-3"><a href="#" className="text-white text-decoration-none fs-5 fw-normal">About</a></li>
+                        <li className="list-group-item py-1 px-3"><Link to="/" className="text-white text-decoration-none fs-5 fw-normal">Home</Link></li>
+                        <li className="list-group-item py-1 px-3"><a to="#products" className="text-white text-decoration-none fs-5 fw-normal">Product</a></li>
+                        <li className="list-group-item py-1 px-3"><a to="#" className="text-white text-decoration-none fs-5 fw-normal">About</a></li>
                         <li className="list-group-item ms-2">
-                            <a href="#">
+                            <a to="#">
                                 <img src={Logout} alt="Logout" title="Logout" />
                             </a>
                         </li>

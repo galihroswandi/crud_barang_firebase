@@ -10,6 +10,10 @@
     border-radius: .5rem;
 }
 
+.navbar-nav>ul>li:hover{
+    cursor: pointer;
+}
+
 .navbar-nav>ul>li:nth-child(1) {
     border-radius: .5rem;
 }

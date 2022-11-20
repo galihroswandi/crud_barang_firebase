@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postDataAPI } from "../../../config/redux/actions";
 import { postToFirebase } from "../../../config/redux/actions/postImage";
+import NavbarComponent from "../../../components/molecule/header/navbar";
+import { Container } from "react-bootstrap";
+import FormComponent from "../../../components/atoms/form";
 
 class TambahBarang extends Component {
 
@@ -68,8 +71,17 @@ class TambahBarang extends Component {
     render() {
         const { nama, jumlah, harga, desc } = this.state;
         return (
-            <div className="container">
-                <div className="wrapper">
+            <div className="container d-flex flex-column">
+                <Container fluid>
+                    <NavbarComponent />
+                </Container>
+                <FormComponent
+                    onFileChange={(e) => this.onFileChange(e)}
+                    onChange={(e, type) => this.onInputChange(e, type)}
+                    state={this.state}
+                    handleSubmit={() => this.handleSubmit()}
+                />
+                {/* <div className="wrapper">
                     <div className="header">
                         <h1>Tambah Barang</h1>
                     </div>
@@ -98,7 +110,7 @@ class TambahBarang extends Component {
                             <button type="submit" onClick={this.handleSubmit}>Kirim</button>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         )
     }

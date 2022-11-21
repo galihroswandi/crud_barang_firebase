@@ -60,9 +60,11 @@ export const postDataAPI = (data) => (dispatch) => {
         })
             .then(() => {
                 resolve(true);
+                dispatch({ type: 'CHANGE_LOADING', value: false })
             })
             .catch(() => {
                 reject(false);
+                dispatch({ type: 'CHANGE_LOADING', value: false })
             })
     })
 }
@@ -101,6 +103,7 @@ export const GetSingleData = (id, userId) => (dispatchEvent) => {
 export const UpdateDataFromAPI = (data) => (dispatch) => {
     const db = getDatabase();
     const url = ref(db, `Barang/${data.userId}/${data.barangId}`);
+    dispatch({ type: 'CHANGE_LOADING', value: true })
     return new Promise((resolve, reject) => {
         set(url, {
             nama_barang: data.nama_barang,
@@ -112,9 +115,11 @@ export const UpdateDataFromAPI = (data) => (dispatch) => {
         })
             .then(response => {
                 resolve(true);
+                dispatch({ type: 'CHANGE_LOADING', value: false })
             })
             .catch(error => {
                 reject(false);
+                dispatch({ type: 'CHANGE_LOADING', value: false })
             })
     })
 }

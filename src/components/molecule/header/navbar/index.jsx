@@ -18,7 +18,7 @@ const NavbarComponent = () => {
                         <li className="list-group-item py-1 px-3"><a to="#" className="text-white text-decoration-none fs-5 fw-normal">About</a></li>
                         <li className="list-group-item ms-2">
                             <a to="#">
-                                <img src={Logout} alt="Logout" title="Logout" />
+                                <img src={Logout} alt="Logout" title="Logout" width="35" />
                             </a>
                         </li>
                     </ul>

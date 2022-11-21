@@ -1,25 +1,31 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
+import FormComponent from "../../../components/atoms/form";
+import FooterComponent from "../../../components/molecule/footer";
 import {
     GetSingleData,
     UpdateDataFromAPI,
 } from "../../../config/redux/actions";
 import { deleteImgFromAPI, postToFirebase } from "../../../config/redux/actions/postImage";
+import NavbarComponent from "./../../../components/molecule/header/navbar";
+import Swal from "sweetalert2";
 
 const UbahBarang = ({ getSingleData, saveUpdate, updateImg, deleteImgLama }) => {
     let { id } = useParams();
     const [change, setChange] = useState(false);
-    const [namaBarang, setNamaBarang] = useState();
-    const [jumlah, setJumlah] = useState();
-    const [imgLama, setImgLama] = useState();
-    const [imgLamaName, setImgLamaName] = useState();
+    const [namaBarang, setNamaBarang] = useState('');
+    const [jumlah, setJumlah] = useState('');
+    const [imgLama, setImgLama] = useState('');
+    const [imgLamaName, setImgLamaName] = useState('');
     const [newImg, setNewImg] = useState();
     const [harga, setHarga] = useState();
     const [desc, setDesc] = useState();
     const [idBarang, setIdBarang] = useState();
 
     useEffect(() => {
+        document.title = "CRUDApps - Change Product"
         const dataUser = JSON.parse(localStorage.getItem("User"));
         getSingleData(id.toString(), dataUser.uid.toString()).then(
             (response) => {
@@ -31,6 +37,8 @@ const UbahBarang = ({ getSingleData, saveUpdate, updateImg, deleteImgLama }) => 
                     setHarga(response.harga);
                     setDesc(response.desc);
                     setIdBarang(id);
+
+                    setChange(true);
                 }
             }
         );
@@ -56,115 +64,99 @@ const UbahBarang = ({ getSingleData, saveUpdate, updateImg, deleteImgLama }) => 
                     };
                     saveUpdate(data).then((response) => {
                         deleteImgLama(imgLamaName).then(result => {
-                            console.log(result);
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Data changed successfully',
+                            })
+                            setNamaBarang('');
+                            setJumlah('');
+                            setHarga('');
+                            setImgLama('');
+                            setDesc('');
                         })
                     });
                 })
         } else {
-
+            const data = {
+                nama_barang: namaBarang,
+                harga: harga,
+                jumlah: jumlah,
+                desc: desc,
+                userId: dataUser.uid,
+                barangId: idBarang,
+                img: {
+                    imgName: imgLamaName,
+                    imgUrl: imgLama
+                }
+            };
+            saveUpdate(data).then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Data changed successfully',
+                })
+                setNamaBarang('');
+                setJumlah('');
+                setHarga('');
+                setImgLama('');
+                setDesc('');
+            })
         }
-
     };
 
+    const handleChange = (e, type) => {
+        switch (type) {
+            case 'nama':
+                setNamaBarang(e.target.value);
+                break;
+            case 'jumlah':
+                setJumlah(e.target.value);
+                break;
+            case 'harga':
+                setHarga(e.target.value);
+                break;
+            case 'desc':
+                setDesc(e.target.value);
+                break;
+            default:
+                break;
+        }
+    }
+
     return (
-        <div className="container mb-5">
-            <div className="wrapper">
-                <div className="header">
-                    <h1>Ubah Barang</h1>
-                </div>
-                <div className="body">
-                    <div className="form-label">
-                        <label htmlFor="nm_brg">Nama Barang</label>
-                        <input
-                            type="text"
-                            name="nama"
-                            id="nm_brg"
-                            autoComplete="off"
-                            value={namaBarang}
-                            onChange={(e) => {
-                                setChange(true);
-                                return setNamaBarang(e.target.value);
-                            }}
-                        />
-                    </div>
-                    <div className="form-label">
-                        <label htmlFor="jumlah">Jumlah</label>
-                        <input
-                            type="text"
-                            name="jumlah"
-                            id="jumlah"
-                            autoComplete="off"
-                            value={jumlah}
-                            onChange={(e) => {
-                                setChange(true);
-                                return setJumlah(e.target.value);
-                            }}
-                        />
-                    </div>
-                    <div className="form-label">
-                        <label htmlFor="harga">Harga</label>
-                        <input
-                            type="text"
-                            name="harga"
-                            id="harga"
-                            autoComplete="off"
-                            value={harga}
-                            onChange={(e) => {
-                                setChange(true);
-                                return setHarga(e.target.value);
-                            }}
-                        />
-                    </div>
-                    <div className="form-text mb-3">
-                        <label htmlFor="desc">Deskripsi</label>
-                        <textarea
-                            name="desc"
-                            id="desc"
-                            cols="30"
-                            rows="10"
-                            value={desc}
-                            onChange={(e) => {
-                                setChange(true);
-                                return setDesc(e.target.value);
-                            }}
-                        ></textarea>
-                    </div>
-                    <div className="form-text d-flex flex-column mb-3">
-                        <label htmlFor="desc">Gambar</label>
-                        <img
-                            src={imgLama}
-                            alt="Image Error"
-                            style={{ width: "10rem" }}
-                        />
-                        <input
-                            type="file"
-                            name="image"
-                            id="image"
-                            autoComplete="off"
-                            onChange={(e) => {
-                                setChange(true);
-                                return setNewImg(e.target.files[0])
-                            }}
-                        />
-                    </div>
-                    <div className="button">
-                        <button type="submit" onClick={() => handleSubmit()}>
-                            Kirim
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div className="container mb-5 d-flex flex-column">
+            <Container fluid>
+                <NavbarComponent />
+            </Container>
+            <FormComponent
+                handleSubmit={handleSubmit}
+                onChange={(e, type) => handleChange(e, type)}
+                title="Change Product"
+                nama_barang={namaBarang}
+                jumlah={jumlah}
+                harga={harga}
+                imgLama={imgLama}
+                newImg={(img) => setNewImg(img)}
+                desc={desc}
+            />
+            <footer>
+                <FooterComponent />
+            </footer>
         </div>
     );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    data: state.product
+});
 
 const mapDispatchToProps = (dispatch) => ({
     getSingleData: (id, userId) => dispatch(GetSingleData(id, userId)),
     saveUpdate: (data) => dispatch(UpdateDataFromAPI(data)),
     updateImg: (data) => dispatch(postToFirebase(data)),
-    deleteImgLama: (imgLama) => dispatch(deleteImgFromAPI(imgLama))
+    deleteImgLama: (imgLama) => dispatch(deleteImgFromAPI(imgLama)),
+    setProduct: (data) => dispatch({ type: 'SET_PRODUCT', value: data })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UbahBarang);

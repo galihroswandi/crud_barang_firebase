@@ -4,6 +4,7 @@ const initialState = {
     isLoading: false,
     user: '',
     data: [],
+    product : []
 }
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +33,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 data: action.value
+            }
+        case 'SET_PRODUCT':
+            return{
+                ...state,
+                product : action.value
             }
         default:
             return state;

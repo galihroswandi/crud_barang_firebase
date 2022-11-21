@@ -27,14 +27,22 @@ const Products = (props) => {
                         {
                             props.barang.map((brg, key) => {
                                 return (
-                                    <div key={key} className="card-wrapper col-2 ms-5 mt-5 cardComp px-0 position-relative overflow-hidden" style={{maxHeight : '25rem'}}>
-                                        <div className="card-header mb-4">
-                                            <img src={brg.data.img.imgUrl} alt="Product" width="100%" />
-                                        </div>
-                                        <div className="card-body px-3 mb-4 position-relative pt-2 border-box"
-                                            style={{ height: "9rem", borderTop : '.01rem solid var(--primary-color)' }}>
+                                    <div key={key} className="card-wrapper col-2 ms-5 mt-5 cardComp px-0 position-relative overflow-hidden" style={{ maxHeight: '25rem' }}>
+                                        <div
+                                            className="card-header"
+                                            style={{
+                                                minHeight: "14rem",
+                                                width: '100%',
+                                                backgroundImage: `url(${brg.data.img.imgUrl})`, 
+                                                backgroundRepeat : 'no-repeat',
+                                                backgroundSize : '99% 99%',
+                                                backgroundPosition : 'center center'
+                                            }}
+                                        />
+                                        <div className="card-body px-3 mb-4 pt-3 position-relative pt-2 border-box"
+                                            style={{ height: "9rem", borderTop: '.01rem solid var(--primary-color)' }}>
                                             <h1 className="text-white fs-6">{brg.data.nama_barang}</h1>
-                                            <p className="text-white fs-5 text-primary lh-lg position-absolute bottom-0" style={{ top : '3.5rem'}}>Rp. {brg.data.harga}</p>
+                                            <p className="text-white fs-5 text-primary lh-lg position-absolute bottom-0" style={{ top: '3.5rem' }}>Rp. {brg.data.harga}</p>
                                         </div>
                                         <div className="card-footer d-flex justify-content-between mt-4 position-absolute bottom-0 start-0 end-0">
                                             <Link to={`/ubah_barang/${brg.id}`} className="change py-2 link">

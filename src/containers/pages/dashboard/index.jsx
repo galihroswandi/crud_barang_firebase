@@ -54,50 +54,6 @@ class Dashboard extends Component {
                 <Header />
                 <BodyComponent handleDelete={(id, img) => handleDelete(id, img)} />
                 <FooterComponent />
-                {/* <div className="container d-flex flex-column">
-                    <div className="div-header d-flex justify-content-around align-items-center mt-4">
-                        <h1 className="me-5">Daftar barang</h1>
-                        <Link to="/tambah_brg" className="btn btn-dark ms-5">
-                            Tambah barang
-                        </Link>
-                    </div>
-                    <div className="body mt-5 d-flex flex-wrap justify-content-center align-items-center">
-                        {barang.map((brg, key) => {
-                            return (
-                                <Card
-                                    style={{ width: "18rem" }}
-                                    className="me-3 mt-4"
-                                    key={key}
-                                >
-                                    <div className="btn-del position-absolute end-0 top-0 fs-5 fw-bold py-0 px-2 text-white" onClick={() => handleDelete(brg.id, brg.data.img.imgName)}>
-                                        X
-                                    </div>
-                                    <Card.Img
-                                        variant="top"
-                                        id="card-img"
-                                        src={brg.data.img.imgUrl}
-                                    />
-                                    <Card.Body>
-                                        <Card.Title>
-                                            {brg.data.nama_barang}
-                                        </Card.Title>
-                                        <Card.Text className="text-danger">
-                                            Rp. {brg.data.harga}
-                                        </Card.Text>
-                                        <Card.Text>{brg.data.desc}</Card.Text>
-                                        <Link
-                                            className="btn btn-dark"
-                                            variant="dark"
-                                            to={`/ubah_barang/${brg.id}`}
-                                        >
-                                            Ubah Barang
-                                        </Link>
-                                    </Card.Body>
-                                </Card>
-                            );
-                        })}
-                    </div>
-                </div> */}
             </div>
         );
     }

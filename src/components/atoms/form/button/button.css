@@ -1,0 +1,8 @@
+.btn.disable {
+    background-color: gray;
+    border: 1px solid gray;
+}
+
+.btn.btn.disable:hover {
+    cursor: not-allowed !important;
+}

@@ -95,3 +95,10 @@ textarea:focus, input:active, input:focus {
     box-shadow: 0 0 .5rem var(--primary-button);
     transition: all .5s ease;
 }
+
+.imgView{
+    max-width: 15rem;
+    max-height: 15rem;
+    box-shadow: 0 0 .3rem var(--primary-button);
+    border-radius: 1rem;
+}

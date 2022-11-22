@@ -1,6 +1,6 @@
 import firebase from "./../../firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, push, ref, onValue, set, child, get, remove } from "firebase/database";
+import { getDatabase, push, ref, onValue, set, get, remove } from "firebase/database";
 
 export const registerUserAPI = (data) => (dispatch) => {
     return new Promise((resolve, reject) => {

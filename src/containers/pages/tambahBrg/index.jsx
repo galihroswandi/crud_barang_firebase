@@ -18,8 +18,12 @@ class TambahBarang extends Component {
         image: ''
     }
 
-    componentDidMount(){
-        document.title = "CRUDApps - Add Product"
+    componentDidMount() {
+        document.title = "CRUDApps - Add Product";
+        const dataUser = JSON.parse(localStorage.getItem("User"));
+        if (!dataUser) {
+            document.location.href = '/login';
+        }
     }
 
     handleSubmit = async () => {
@@ -81,7 +85,7 @@ class TambahBarang extends Component {
 
     render() {
         return (
-            <div className="container d-flex flex-column">
+            <div className="container d-flex justify-content-center align-items-center flex-column">
                 <Container fluid>
                     <NavbarComponent />
                 </Container>

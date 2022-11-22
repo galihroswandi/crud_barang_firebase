@@ -12,6 +12,9 @@ class Dashboard extends Component {
 
     componentDidMount() {
         const dataUser = JSON.parse(localStorage.getItem("User"));
+        if( !dataUser ){
+            document.location.href = '/login';
+        }
         const { GetDataFromAPI } = this.props;
         document.title = "CRUDApps - Dashboard";
         GetDataFromAPI(dataUser.uid);

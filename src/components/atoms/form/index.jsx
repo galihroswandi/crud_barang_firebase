@@ -31,7 +31,7 @@ const FormComponent = (props) => {
     return (
         <div className="form-wrapper-component mt-5 mb-5">
             <div className="header py-2 bg-primary-button">
-                <h1 className="text-white fs-4 mt-1">{!props.title ? "Add Product" : props.title}</h1>
+                <h1 className="text-white fs-4 mt-1 text-center">{!props.title ? "Add Product" : props.title}</h1>
             </div>
             <div className="body px-5 mx-5">
                 <div className="form-floating mb-4">

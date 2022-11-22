@@ -1,23 +1,76 @@
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.login-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 
 .registerWrapper {
-    background-color: rgb(91, 241, 233);
-    max-width: 20%;
-    padding: 1rem;
-    margin-top: 15rem;
-    border-radius: .5rem;
-    min-width: 15%;
+    background-color: transparent;
+    box-shadow: 0 0 .5rem var(--primary-button);
+    border-radius: .8rem;
+    min-width: 30%;
 }
 
-.header {
-    padding: .1rem .5rem;
-    text-align: center;
+.body-login {
+    width: 100%;
 }
 
-.btn.disabled {
-    cursor: not-allowed;
+.body-login>.form-floating {
+    width: 80%;
+}
+
+.body-login>.form-floating>input {
+    background-color: transparent !important;
+    border: none;
+    box-shadow: 0 0 .2rem var(--primary-button);
+    color: rgb(209, 209, 209);
+}
+
+.body-login>.form-floating>label {
+    color: var(--text-dark);
+}
+
+.body-login>.button>button {
+    background-color: var(--primary-button);
+    width: 80%;
+    color: rgb(209, 209, 209);
+    border: none;
+}
+
+.body-login>.button>button:active {
+    opacity: .8;
+    background-color: rgba(132, 99, 239);
+    border: none;
+    color: rgb(209, 209, 209);
+    transition: all .2s ease-in-out;
+}
+
+.body-login>.button>.hr {
+    width: 80%;
+    color: var(--text-dark);
+}
+
+.body-login>.button>.create-account {
+    color: var(--text-white);
+    max-width: 45%;
+    background-color: #118ab2;
+    box-sizing: border-box;
+}
+
+.body-login>.button>.btn.disable {
+    background-color: rgba(132, 99, 239, .7);
+    color: rgb(209, 209, 209);
+    opacity: .8;
+}
+
+.body-login>.button>.btn.disable:hover {
+    cursor: not-allowed !important;
+}
+
+.body-login>.button>.btn.disable:active {
+    background-color: rgba(132, 99, 239, .7);
+    color: rgb(209, 209, 209);
+    opacity: .8;
 }

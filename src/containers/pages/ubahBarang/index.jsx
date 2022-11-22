@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FormComponent from "../../../components/atoms/form";
 import FooterComponent from "../../../components/molecule/footer";
 import {
@@ -23,10 +23,14 @@ const UbahBarang = ({ getSingleData, saveUpdate, updateImg, deleteImgLama }) => 
     const [harga, setHarga] = useState();
     const [desc, setDesc] = useState();
     const [idBarang, setIdBarang] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.title = "CRUDApps - Change Product"
         const dataUser = JSON.parse(localStorage.getItem("User"));
+        if( !dataUser ){
+            navigate('/login');
+        }
         getSingleData(id.toString(), dataUser.uid.toString()).then(
             (response) => {
                 if (change == false) {
@@ -125,7 +129,7 @@ const UbahBarang = ({ getSingleData, saveUpdate, updateImg, deleteImgLama }) => 
     }
 
     return (
-        <div className="container mb-5 d-flex flex-column">
+        <div className="container mb-5 d-flex flex-column justify-content-center align-items-center">
             <Container fluid>
                 <NavbarComponent />
             </Container>

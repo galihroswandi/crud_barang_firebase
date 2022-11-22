@@ -1,10 +1,18 @@
 import React from "react";
 import "./navbar.css";
 import { Container, Navbar, } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logout from './../../../../assets/icons/logout.svg';
 
 const NavbarComponent = () => {
+
+    const navigate = useNavigate();
+
+    const logout = () => {
+        localStorage.clear();
+        navigate('/login');
+    }
+
     return (
         <Navbar bg="transparent" variant="dark" expand="lg">
             <Container className="py-2">
@@ -17,7 +25,7 @@ const NavbarComponent = () => {
                         <li className="list-group-item py-1 px-3"><a to="#products" className="text-white text-decoration-none fs-5 fw-normal">Product</a></li>
                         <li className="list-group-item py-1 px-3"><a to="#" className="text-white text-decoration-none fs-5 fw-normal">About</a></li>
                         <li className="list-group-item ms-2">
-                            <a to="#">
+                            <a onClick={logout}>
                                 <img src={Logout} alt="Logout" title="Logout" width="35" />
                             </a>
                         </li>

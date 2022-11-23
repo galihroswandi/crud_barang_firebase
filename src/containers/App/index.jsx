@@ -2,17 +2,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { store } from '../../../config/redux/store';
+import { store } from '../../config/redux/store';
 import { Provider } from 'react-redux';
 
 // Pages
-import Dashboard from '../dashboard';
-import Login from '../login';
-import Register from '../register';
-import TambahBarang from '../tambahBrg';
+import Dashboard from '../pages/dashboard';
+import Login from '../pages/login';
+import Register from '../pages/register';
+import TambahBarang from '../pages/tambahBrg';
 
 // Component
-import UbahBarang from '../ubahBarang';
+import UbahBarang from '../pages/ubahBarang';
 
 function App() {
   return (

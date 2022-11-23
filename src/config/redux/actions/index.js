@@ -72,6 +72,9 @@ export const postDataAPI = (data) => (dispatch) => {
 export const GetDataFromAPI = (userId) => (dispatch) => {
     const db = getDatabase();
     const dataUser = JSON.parse(localStorage.getItem('User'));
+    if( !dataUser ){
+        return false;
+    }
     const linkRef = ref(db, `Barang/${dataUser.uid}`);
     return new Promise((resolve, reject) => {
         onValue(linkRef, (snapshot) => {

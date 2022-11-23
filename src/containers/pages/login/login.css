@@ -74,3 +74,13 @@
     color: rgb(209, 209, 209);
     opacity: .8;
 }
+
+.message {
+    margin-bottom: -.5rem;
+    display: none;
+}
+
+.message>p {
+    color: #fc6171;
+    letter-spacing: 1.2px;
+}

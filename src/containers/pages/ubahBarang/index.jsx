@@ -160,7 +160,6 @@ const mapDispatchToProps = (dispatch) => ({
     saveUpdate: (data) => dispatch(UpdateDataFromAPI(data)),
     updateImg: (data) => dispatch(postToFirebase(data)),
     deleteImgLama: (imgLama) => dispatch(deleteImgFromAPI(imgLama)),
-    setProduct: (data) => dispatch({ type: 'SET_PRODUCT', value: data })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UbahBarang);

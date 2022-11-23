@@ -18,7 +18,7 @@ class Register extends Component {
         document.title = 'CRUDApps - Register';
         const dataUser = JSON.parse(localStorage.getItem("User"));
         if (dataUser) {
-            document.location.href = '/login';
+            document.location.href = '/';
         }
     }
 

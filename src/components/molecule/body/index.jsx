@@ -6,7 +6,7 @@ const BodyComponent = (props) => {
     return (
         <div>
             <NavigatorComponent />
-            <Products handleDelete={(id, img) => props.handleDelete(id, img)} />
+            <Products user_id={props.user_id} handleDelete={(id, img) => props.handleDelete(id, img)} />
         </div>
     )
 }

@@ -71,24 +71,27 @@ export const postDataAPI = (data) => (dispatch) => {
 
 export const GetDataFromAPI = (userId) => (dispatch) => {
     const db = getDatabase();
-    const linkRef = ref(db, `Barang/${userId}`);
+    const dataUser = JSON.parse(localStorage.getItem('User'));
+    const linkRef = ref(db, `Barang/${dataUser.uid}`);
     return new Promise((resolve, reject) => {
         onValue(linkRef, (snapshot) => {
             const data = snapshot.val();
-            resolve(data);
-            const result = [];
-            Object.keys(data).map(res => {
-                result.push({
-                    id: res,
-                    data: data[res]
+            if (data) {
+                resolve(data);
+                const result = [];
+                Object.keys(data).map(res => {
+                    result.push({
+                        id: res,
+                        data: data[res]
+                    })
                 })
-            })
-            dispatch({ type: "SET_DATA", value: result })
+                dispatch({ type: "SET_DATA", value: result })
+            }
         });
     })
 }
 
-export const GetSingleData = (id, userId) => (dispatchEvent) => {
+export const GetSingleData = (id, userId) => (dispatch) => {
     const db = getDatabase();
     const linkRef = ref(db, `Barang/${userId}/${id}`);
     return new Promise((resolve, reject) => {

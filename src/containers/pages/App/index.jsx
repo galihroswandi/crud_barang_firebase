@@ -24,6 +24,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/tambah_brg' element={<TambahBarang />} />
           <Route path='/ubah_barang/:id' element={<UbahBarang />} />
+          <Route path='/delivery' element={<fiturNotFound />} />
         </Routes>
       </Router>
     </Provider>

@@ -42,6 +42,7 @@ const FormComponent = (props) => {
                         id="nm_brg"
                         autoComplete="off"
                         placeholder="Product Name"
+                        maxLength="38"
                         value={!props.state ? props.nama_barang : props.state.nama}
                         onChange={e => props.onChange(e, 'nama')}
                     />
